@@ -81,7 +81,7 @@ class AmazonError(Exception):
 
 class AmazonCall(object):
     def __init__(self, AWSAccessKeyId=None, AWSSecretAccessKey=None,
-            AssociateTag=None, Operation=None, Version="2013-08-01", Region=None,
+            AssociateTag=None, Region=None, Operation=None, Version="2013-08-01", 
             Timeout=None, MaxQPS=None, Parser=None,
             CacheReader=None, CacheWriter=None,
             ErrorHandler=None,
@@ -114,9 +114,9 @@ class AmazonCall(object):
             return object.__getattr__(self, k)
         except:
             return AmazonCall(self.AWSAccessKeyId, self.AWSSecretAccessKey,
-                              self.AssociateTag,
+                              self.AssociateTag, self.Region,
                               Operation=k, Version=self.Version,
-                              Region=self.Region, Timeout=self.Timeout,
+                              Timeout=self.Timeout,
                               MaxQPS=self.MaxQPS, Parser=self.Parser,
                               CacheReader=self.CacheReader,
                               CacheWriter=self.CacheWriter,
@@ -264,8 +264,8 @@ class AmazonCall(object):
 
 class Amazon(AmazonCall):
     def __init__(self, AWSAccessKeyId=None, AWSSecretAccessKey=None,
-            AssociateTag=None, Operation=None, Version="2011-08-01",
-            Region="US", Timeout=None, MaxQPS=None, Parser=None,
+            AssociateTag=None, Region=None, Operation=None, Version="2011-08-01",
+             Timeout=None, MaxQPS=None, Parser=None,
             CacheReader=None, CacheWriter=None, ErrorHandler=None):
         """Create an Amazon API object.
 
@@ -311,8 +311,8 @@ class Amazon(AmazonCall):
         # Operation is for internal use by AmazonCall.__getattr__()
 
         AmazonCall.__init__(self, AWSAccessKeyId, AWSSecretAccessKey,
-                            AssociateTag, Operation, Version=Version,
-                            Region=Region, Timeout=Timeout,
+                            AssociateTag, Region, Operation=Operation, Version=Version,
+                             Timeout=Timeout,
                             MaxQPS=MaxQPS, Parser=Parser,
                             CacheReader=CacheReader,
                             CacheWriter=CacheWriter,
